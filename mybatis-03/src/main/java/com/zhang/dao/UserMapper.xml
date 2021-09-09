@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--idea中连接了数据库则需要用到mybatis.-->
+<mapper namespace="com.com.zhang.dao.UserDao">
+    <select id="getUserList" resultType="User">
+        select * from mybatis.user;
+    </select>
+    <insert id="insertUser" parameterType="User">
+        insert into mybatis.user(id,name,pwd) values (#{id},#{name},#{pwd});
+    </insert>
+<!--map传递参数，直接在sql中取出key即可，对象传递参数，直接塞sql中取对象的属性即可，只有一个基本类型参数的情况下，可以直接在sql中取到
+多个参数用Map，或者注解-->
+    <select id="getUserById" resultType="User" parameterType="map"  >
+        select * from mybatis.user where id = #{id} and name = #{name};
+    </select>
+    <select id="getUserLike" resultType="User">
+        select * from mybatis.user where name like #{value};
+    </select>
+
+</mapper>
